@@ -1,5 +1,5 @@
 {
-  "name": "@username/hearty-helper",
+  "name": "@srinivas_n/hearty-helper",
   "version": "1.0.0",
   "description": "Hearty helper is a small libraray that gives helper function like number formatter, date formatter, Object check , etc.",
   "main": "index.js",
