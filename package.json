@@ -1,0 +1,26 @@
+{
+  "name": "@username/hearty-helper",
+  "version": "1.0.0",
+  "description": "Hearty helper is a small libraray that gives helper function like number formatter, date formatter, Object check , etc.",
+  "main": "index.js",
+  "scripts": {
+    "test": "mocha --reporter spec"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/SrinivasNarayansetty/hearty-helper.git"
+  },
+  "author": "“Srinivas <“srinivas69cse@gmail.com”> (http://srinivasnarayansetty.com/)",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/SrinivasNarayansetty/hearty-helper/issues"
+  },
+  "homepage": "https://github.com/SrinivasNarayansetty/hearty-helper#readme",
+  "engines": {
+    "node": ">=4.2.4"
+  },
+  "devDependencies": {
+    "chai": "^4.2.0",
+    "mocha": "^5.2.0"
+  }
+}
