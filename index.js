@@ -448,37 +448,36 @@ function getCookie(c_name) {
 
 
 /**
- * @name sendHttpPostRequest
- * @typicalname sendHttpPostRequest
+ * @name sendHttpRequest
+ * @typicalname sendHttpRequest
  * @param {string} input  - post request data
  * @return {string } It posts the data to the given url and will receive response in callback function
  *
  * @usage
  * var heartyhelper = require('hearty-helper') 
- * var input = sendHttpPostRequest({'id:1,name:'srinivas'},'http://srinivasnarayansetty.com/',setBotResponse,true)
+ * var input = ('POST',{'id:1,name:'srinivas'},'http://srinivasnarayansetty.com/',setBotResponse,true)
  *
- * heartyhelper.getCookie(input)
+ * heartyhelper.sendHttpRequest(input)
  * Output: responseText, status code
  *
  */
 
-function sendHttpPostRequest(data, url, callback, ASYNC) {
+function sendHttpRequest(type, data, url, callback, ASYNC) {
     var requestData = isJson(data) ? data : JSON.stringify(data);
-    let xhr = new XMLHttpRequest();
-    xhr.open("POST", url, ASYNC);
+    var xhr = new XMLHttpRequest();
+    xhr.open(type, url, ASYNC);
     xhr.setRequestHeader("Content-type", "application/json; charset=utf-8");
-    xhr.setRequestHeader("Access-Control-Allow-Origin", "*");
-    xhr.setRequestHeader("Accept", "application/json; charset=utf-8");
-    xhr.onload = function () {
+    xhr.send(requestData)
+    xhr.onreadystatechange = function () {
         if (this.readyState == 4 && this.status == 200 && typeof callback != undefined) {
-            callback(this.responseText, this.status);
+            callback(JSON.parse(this.responseText), this.status);
         } else {
             console.log('error occured posting data: ' + this.status);
         }
     }
 
-    xhr.send(requestData);
 }
+
 
 
 
