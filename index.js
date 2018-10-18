@@ -131,10 +131,14 @@ function isObject(data) {
 
 function getSizeOfObject(data) {
     var size = 0, key;
-    for (key in data) {
-        if (data.hasOwnProperty(key)) size++;
+    if (!isObject(data)) {
+        return null;
+    } else {
+        for (key in data) {
+            if (data.hasOwnProperty(key)) size++;
+        }
+        return size;
     }
-    return size;
 }
 
 
@@ -293,7 +297,7 @@ function getRandomNumber() {
  *
  * @usage
  * var heartyhelper = require('hearty-helper') 
- * input : div DOM element,{name:'srinivas',id:'hearty-tag'}
+ * var input : div DOM element ,{name:'srinivas',id:'hearty-tag'}
  *
  * heartyhelper.setMultipleAttr(input)
  * Output: <div name="srinivas" id="hearty-tag"></div>
@@ -335,18 +339,26 @@ function createField(elmName, elemAttr) {
 /**
  * @name addClass
  * @typicalname addClass
- * @param {params} input  - input DOM element & class name
+ * @param {params} input  - attribute type, attribute value & class name
  * @return {DOM element} sets class name for the given DOM element
  *
  * @usage
- * var heartyhelper = require('hearty-helper') 
- * input : (div DOM element,'hearty-element')
+ * var heartyhelper = require('hearty-helper')
+ * input : (id, 'hearty-tag', 'hearty-element')
  *
  * heartyhelper.addClass(input)
- * Output: <div class="hearty-element"></div>
+ * Output: <div id="hearty-tag" class="hearty-element hearty-tag"></div>
  *
  */
-function addClass(elem, clsnam) {
+
+
+function addClass(elementType, attrValu, clsnam) {
+    var elem;
+    if (elementType == 'class') {
+        elem = document.getElementsByClassName(attrValu)[0];
+    } else if (elementType == 'id') {
+        elem = document.getElementById(attrValu);
+    }
     if (elem.classList) {
         elem.classList.add(clsnam);
     } else {
@@ -359,18 +371,24 @@ function addClass(elem, clsnam) {
 /**
  * @name removeClass
  * @typicalname removeClass
- * @param {params} input  - input DOM element & class name
+ * @param {params} input  - attribute type, attribute value & class name
  * @return {DOM element} removes class name for the given DOM element
  *
  * @usage
  * var heartyhelper = require('hearty-helper') 
- * input : (div DOM element,'hearty-element')
+ * input : (id, 'hearty-tag', 'hearty-element')
  *
  * heartyhelper.removeClass(input)
- * Output: <div></div>
+ * Output: <div id="hearty-tag" class="hearty-tag"></div>
  *
  */
-function removeClass(elem, clsnam) {
+function removeClass(elementType, attrValu, clsnam) {
+    var elem;
+    if (elementType == 'class') {
+        elem = document.getElementsByClassName(attrValu)[0];
+    } else if (elementType == 'id') {
+        elem = document.getElementById(attrValu);
+    }
     if (elem.classList) {
         elem.classList.remove(clsnam);
     } else {
@@ -386,7 +404,6 @@ function removeClass(elem, clsnam) {
 
 
 
-
 /**
  * @name setCookie
  * @typicalname setCookie
@@ -395,7 +412,7 @@ function removeClass(elem, clsnam) {
  *
  * @usage
  * var heartyhelper = require('hearty-helper') 
- * var input = { cname: 'b2bRefeeral', cvalue: 1, expires: parseInt(1) };
+ * var input = { cname: 'b2bRefeeral', cvalue: 1, expires: parseInt(1) }
  *
  * heartyhelper.setCookie(input)
  * Output: it sets cookie with given params
@@ -455,7 +472,7 @@ function getCookie(c_name) {
  *
  * @usage
  * var heartyhelper = require('hearty-helper') 
- * var input = ('POST',{'id:1,name:'srinivas'},'http://srinivasnarayansetty.com/',setBotResponse,true)
+ * var input = ('POST',{'id:1,name:'srinivas'},'http://srinivasnarayansetty.com/getData',setBotResponse,true)
  *
  * heartyhelper.sendHttpRequest(input)
  * Output: responseText, status code
