@@ -230,7 +230,15 @@ Receives required parameters for sending http request such as reuqest type, data
 
 ```
 
+## Demo
+Demo @[hearty-helper](https://tonicdev.com/npm/hearty-helper)
+| https://tonicdev.com/npm/hearty-helper
 
+## Author
+Srinivas N [srinivas69cse@gmail.com]
+
+## Licence
+MIT @[Srinivas_N](srinivasnarayansetty.com/)
 
 
 
