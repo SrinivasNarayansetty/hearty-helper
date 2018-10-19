@@ -153,45 +153,6 @@ Returns random number of length 13 without providing any input
 ```
 
 
-## createField
-
-Receives DOM element type, and object that containing attribute values. It creates DOM element of given type and set attribute values from input
-```javascript
-
-    var input : (DOM element type,{name:'srinivas',id:'hearty-tag'})
-
-    heartyhelper.createField(input)
-    Output: <div name="srinivas" id="hearty-tag"></div>
-
-```
-
-
-## addClass
-
-Receives DOM element type, and object that containing attribute values.It adds class to the claslist of the element
-```javascript
-
-    var input : (id, 'hearty-tag', 'hearty-element')
-
-    heartyhelper.addClass(input)
-    Output: <div id="hearty-tag" class="hearty-element hearty-tag"></div>
-
-```
-
-
-## removeClass
-
-Receives DOM element type, and object that containing attribute values. It removes given class name from given element classlist
-```javascript
-
-    var input : (DOM element type,{name:'srinivas',id:'hearty-tag'})
-
-    heartyhelper.removeClass(input)
-    Output: <div name="srinivas" id="hearty-tag"></div>
-
-```
-
-
 ## setCookie
 
 Receives parameters for cookie such as cookiee name, value, and expiry date. It sets into mentioned domain.If no domain name is provided, cookie will be set '/' domain.  

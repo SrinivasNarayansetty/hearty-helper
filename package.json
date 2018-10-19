@@ -1,6 +1,6 @@
 {
   "name": "hearty-helper",
-  "version": "1.0.3",
+  "version": "1.0.4",
   "description": "Hearty helper is a small libraray that gives helper function like number formatter, date formatter, Object check , etc.",
   "main": "index.js",
   "scripts": {

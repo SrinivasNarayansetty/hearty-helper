@@ -19,10 +19,6 @@ exports.isAlphanumeric = isAlphanumeric
 exports.removeSpaces = removeSpaces
 exports.getRandomString = getRandomString
 exports.getRandomNumber = getRandomNumber
-exports.setMultipleAttr = setMultipleAttr
-exports.createField = createField
-exports.addClass = addClass
-exports.removeClass = removeClass
 exports.setCookie = setCookie
 exports.getCookie = getCookie
 exports.sendHttpRequest = sendHttpRequest
@@ -271,8 +267,8 @@ function removeSpaces(str) {
  *
  */
 function getRandomString(len) {
-    len = len || 10;
-    charSet = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
+    var len = len || 10;
+    var charSet = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
     var randomString = '';
     for (var i = 0; i < len; i++) {
         var randomPoz = Math.floor(Math.random() * charSet.length);
@@ -302,121 +298,6 @@ function getRandomNumber() {
     var d = new Date();
     return d.getTime();
 }
-
-
-
-/**
- * @name setMultipleAttr
- * @typicalname setMultipleAttr
- * @param {params} input  - input DOM element & attributes
- * @return { DOM element } sets attributes for the given DOM element
- *
- * @usage
- * var heartyhelper = require('hearty-helper') 
- * var input : div DOM element ,{name:'srinivas',id:'hearty-tag'}
- *
- * heartyhelper.setMultipleAttr(input)
- * Output: <div name="srinivas" id="hearty-tag"></div>
- *
- */
-
-function setMultipleAttr(elmName, obj) {
-    var elemName = elmName;
-    for (var key in obj) {
-        elemName.setAttribute(key, obj[key]);
-    }
-    return elemName;
-}
-
-
-
-/**
- * @name createField
- * @typicalname createField
- * @param {params} input  - input DOM element & attributes
- * @return {DOM element} sets attributes for the given DOM element
- *
- * @usage
- * var heartyhelper = require('hearty-helper') 
- * input : ('div',{name:'srinivas',id:'hearty-tag'})
- *
- * heartyhelper.createField(input)
- * Output: <div name="srinivas" id="hearty-tag"></div>
- *
- */
-function createField(elmName, elemAttr) {
-    var elem = document.createElement(elmName);
-    var res = setMultipleAttr(elem, elemAttr);
-    return res;
-}
-
-
-
-/**
- * @name addClass
- * @typicalname addClass
- * @param {params} input  - attribute type, attribute value & class name
- * @return {DOM element} sets class name for the given DOM element
- *
- * @usage
- * var heartyhelper = require('hearty-helper')
- * input : (id, 'hearty-tag', 'hearty-element')
- *
- * heartyhelper.addClass(input)
- * Output: <div id="hearty-tag" class="hearty-element hearty-tag"></div>
- *
- */
-
-
-function addClass(elementType, attrValu, clsnam) {
-    var elem;
-    if (elementType == 'class') {
-        elem = document.getElementsByClassName(attrValu)[0];
-    } else if (elementType == 'id') {
-        elem = document.getElementById(attrValu);
-    }
-    if (elem.classList) {
-        elem.classList.add(clsnam);
-    } else {
-        elem.className = elem.className + ' ' + clsnam;
-    }
-}
-
-
-
-/**
- * @name removeClass
- * @typicalname removeClass
- * @param {params} input  - attribute type, attribute value & class name
- * @return {DOM element} removes class name for the given DOM element
- *
- * @usage
- * var heartyhelper = require('hearty-helper') 
- * input : (id, 'hearty-tag', 'hearty-element')
- *
- * heartyhelper.removeClass(input)
- * Output: <div id="hearty-tag" class="hearty-tag"></div>
- *
- */
-function removeClass(elementType, attrValu, clsnam) {
-    var elem;
-    if (elementType == 'class') {
-        elem = document.getElementsByClassName(attrValu)[0];
-    } else if (elementType == 'id') {
-        elem = document.getElementById(attrValu);
-    }
-    if (elem.classList) {
-        elem.classList.remove(clsnam);
-    } else {
-        var classList = elem.className.split(' ');
-        var cl = '';
-        for (var i in classList) {
-            cl += classList[i] != clsnam ? classList[i] + ' ' : '';
-        }
-        elem.className = cl;
-    }
-}
-
 
 
 
