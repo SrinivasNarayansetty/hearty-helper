@@ -1,217 +1,241 @@
-## hearty-helper [![NPM version](https://img.shields.io/npm/v/hearty-helper.svg)](https://www.npmjs.com/package/hearty-helper)
+# hearty-helper
 
-Hearty helper is a small libraray that can provide small helper functions like getting Url parameters, get Session Id, is Object, checking if Empty Object, get Size of Object, etc,.
+[![NPM version](https://img.shields.io/npm/v/hearty-helper.svg)](https://www.npmjs.com/package/hearty-helper)
+[![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](https://opensource.org/licenses/MIT)
 
+A lightweight TypeScript utility library providing helper functions for URL parsing, object checks, string operations, cookies, and HTTP requests.
 
-# Installation
+## Installation
 
-npm i npm i hearty-helper
-
-
-# Usage 
-
-var heartyhelper = require('hearty-helper')
-
-
-## geturlParams(url)
-
-Receives the url from input and will return all the parameters passed into one object
-```javascript
-
-    var inputString = 'http://srinivasnarayansetty.com?originCountry=IN&type=R&date=15/10/2018&version=1.1&ADT=1&CHD=0&INF=0&class=Economy&source=webpage'
- 
-    heartyhelper.geturlParams(inputString)
-    Output: {
-        originCountry:IN
-        type:R
-        date:15/10/2018
-        version:1.1
-        ADT:1
-        CHD:0
-        INF:0
-        class:Economy
-        source:webpage
-    }
-  
- ```
-
-
-## getSessionId(key)
-
-Receives the session key and returns the sessionId with given key.If session diesn't exists,it creates random id and set into session storage
-```javascript
-
-    var input = 'cb_tab'
-
-    heartyhelper.getSessionId(input)
-    Output: 'MbNhIUq2HhwgTGCyINGPXg8SgnlwWf'
-
- ```
-
-
-## isObject(obj)
-
-Receives Object as input and returns if the provided input is pure object or not
-```javascript
-
-    var input = []
-    
-    heartyhelper.isObject(input)
-    Output: false
-
+```bash
+npm install hearty-helper
 ```
 
+## Quick Start
 
-## getSizeOfObject(obj)
+```ts
+// ESM
+import { getUrlParams, isObject, getRandomString } from 'hearty-helper'
 
-Receives Object as input and returns size of the object input, If the input is not object, it returns null
-```javascript
-
-    var input = { id: 'MbNhIUq2HhwgTGCyINGPXg8SgnlwWf' }
-    
-    heartyhelper.getSizeOfObject(input)
-    Output: 1
-
+// CommonJS
+const { getUrlParams, isObject, getRandomString } = require('hearty-helper')
 ```
 
+---
 
-## isObjectEmpty
+## API
 
-Receives Object as input and returns if input Object is empty or not
-```javascript
+### URL Utilities
 
-    var input = { id: 'MbNhIUq2HhwgTGCyINGPXg8SgnlwWf' }
+#### `getUrlParams(url?: string)`
 
-    heartyhelper.isObjectEmpty(input)
-    Output: false
+Parses URL query parameters into an object.
 
+```ts
+import { getUrlParams } from 'hearty-helper'
+
+const params = getUrlParams('https://example.com?name=sri&page=2&lang=en')
+// { name: 'sri', page: '2', lang: 'en' }
 ```
 
+### Object Utilities
 
-## isJson
+#### `isObject(data: unknown)`
 
-Receives Object as input and returns if input is JSON or not
-```javascript
+Checks if a value is a plain object (not an array, null, or other type).
 
-    var input = "{ "id": 1 , "name":"srinivas"}"
+```ts
+import { isObject } from 'hearty-helper'
 
-    heartyhelper.isJson(input)
-    Output: true
-
+isObject({ a: 1 })  // true
+isObject([1, 2])     // false
+isObject(null)       // false
 ```
 
+#### `getSizeOfObject(data: unknown)`
 
-## isAlphanumeric
+Returns the number of own enumerable properties in an object, or `null` if not an object.
 
-Receives String as input and returns if string is aplha numaric or not
-```javascript
+```ts
+import { getSizeOfObject } from 'hearty-helper'
 
-    var input = 'sssdee333@'
-
-    heartyhelper.isAlphanumeric(input)
-    Output: false
-
+getSizeOfObject({ a: 1, b: 2 })  // 2
+getSizeOfObject([])               // null
 ```
 
+#### `isObjectEmpty(data: unknown)`
 
-## removeSpaces
+Checks if an object is empty.
 
-Receives String as input and returns string by removing all the spaces 
-```javascript
+```ts
+import { isObjectEmpty } from 'hearty-helper'
 
-    var input = 'hello all welcome to npm'
-
-    heartyhelper.removeSpaces(input)
-    Output: 'helloallwelcometonpm'
-
+isObjectEmpty({})        // true
+isObjectEmpty({ a: 1 })  // false
 ```
 
+### JSON Utilities
 
-## getRandomString
+#### `isJson(str: string)`
 
-Receives length of random string needed as input and returns random string with given input length
-```javascript
+Checks if a string is valid JSON.
 
-    var input = 10
+```ts
+import { isJson } from 'hearty-helper'
 
-    heartyhelper.getRandomString(input)
-    Output: 'Y0X21OHdUB'
-
+isJson('{"name":"sri"}')  // true
+isJson('not json')        // false
 ```
 
+### String Utilities
 
-## getRandomNumber
+#### `isAlphanumeric(str: string)`
 
-Returns random number of length 13 without providing any input
-```javascript
+Checks if a string contains only alphanumeric characters.
 
-    //no input required
+```ts
+import { isAlphanumeric } from 'hearty-helper'
 
-    heartyhelper.getRandomNumber()
-    Output: 1539077573404
-
+isAlphanumeric('abc123')   // true
+isAlphanumeric('abc@123')  // false
 ```
 
+#### `removeSpaces(str: string)`
 
-## setCookie
+Removes all whitespace from a string.
 
-Receives parameters for cookie such as cookiee name, value, and expiry date. It sets into mentioned domain.If no domain name is provided, cookie will be set '/' domain.  
-```javascript
+```ts
+import { removeSpaces } from 'hearty-helper'
 
-    var input : { cname: 'b2bRefeeral', cvalue: 1, expires: parseInt(1) }
-
-    heartyhelper.setCookie(input)
-    Output: it sets cookie with given params
-
+removeSpaces('hello all welcome')  // 'helloallwelcome'
 ```
 
+#### `getRandomString(length?: number)`
 
-## getCookie
+Generates a random alphanumeric string. Defaults to length 10.
 
-Receives cookie name from input and returns the value of the cookie  
-```javascript
+```ts
+import { getRandomString } from 'hearty-helper'
 
-    var input = 'cname'
-
-    heartyhelper.getCookie(input)
-    Output: 'fghbfhfhf22228789'
-
+getRandomString(8)   // e.g. 'aB3xK9mQ'
+getRandomString()    // e.g. 'Y0X21OHdUB' (length 10)
 ```
 
+#### `getTimestamp()`
 
-## sendHttpRequest
+Returns the current Unix timestamp in milliseconds.
 
-Receives required parameters for sending http request such as reuqest type, data, url, callback, ASYNC and sends the http request and returns the response
-```javascript
+```ts
+import { getTimestamp } from 'hearty-helper'
 
-    var input = ('POST',{'id:1,name:'srinivas'},'http://srinivasnarayansetty.com/getData',setBotResponse,true)
-    
-    heartyhelper.sendHttpRequest(input)
-    Output: responseText, status code
-
+getTimestamp()  // e.g. 1712500000000
 ```
 
-## Demo
-Demo @[hearty-helper](https://tonicdev.com/npm/hearty-helper)
-| https://tonicdev.com/npm/hearty-helper
+### Session Utilities (Browser only)
+
+#### `getSessionId(sessionKey: string)`
+
+Gets or creates a session ID in `sessionStorage`. Generates a random 30-character string if none exists.
+
+```ts
+import { getSessionId } from 'hearty-helper'
+
+getSessionId('tab_session')  // e.g. 'MbNhIUq2HhwgTGCyINGPXg8SgnlwWf'
+```
+
+### Cookie Utilities (Browser only)
+
+#### `setCookie(options: CookieOptions)`
+
+Sets a cookie with the given options.
+
+```ts
+import { setCookie } from 'hearty-helper'
+
+setCookie({
+  cname: 'theme',
+  cvalue: 'dark',
+  expires: 7,        // days from now
+  path: '/',
+  secure: true,
+  sameSite: 'Lax',
+})
+```
+
+#### `getCookie(name: string)`
+
+Gets a cookie value by name. Returns `undefined` if not found.
+
+```ts
+import { getCookie } from 'hearty-helper'
+
+getCookie('theme')  // 'dark'
+```
+
+### HTTP Utilities
+
+#### `sendHttpRequest<T>(url: string, options?: HttpRequestOptions)`
+
+Sends an HTTP request using the Fetch API. Returns parsed JSON.
+
+```ts
+import { sendHttpRequest } from 'hearty-helper'
+
+// GET request
+const users = await sendHttpRequest('https://api.example.com/users')
+
+// POST request
+const result = await sendHttpRequest('https://api.example.com/users', {
+  method: 'POST',
+  body: { name: 'Srinivas' },
+})
+```
+
+---
+
+## Tech Stack
+
+| Tool | Purpose |
+|------|---------|
+| **TypeScript** | Type-safe source code |
+| **tsup** | Bundling (ESM + CJS dual output) |
+| **Vitest** | Testing |
+| **Node.js 18+** | Minimum runtime |
+
+## Development
+
+```bash
+# Install dependencies
+npm install
+
+# Run tests
+npm test
+
+# Run tests in watch mode
+npm run test:watch
+
+# Build the package
+npm run build
+
+# Type check
+npm run lint
+```
+
+## Migration from v1
+
+v2 is a major rewrite in TypeScript with modern tooling. Key changes:
+
+- **ESM + CJS dual exports** — works with both `import` and `require`
+- **TypeScript types included** — full type definitions shipped with the package
+- **`sendHttpRequest` now uses Fetch API** — returns a Promise instead of using callbacks
+- **`setCookie` no longer hardcodes a domain** — you must provide `domain` explicitly
+- **`getRandomNumber` renamed to `getTimestamp`** — old name still works as a deprecated alias
+- **`geturlParams` renamed to `getUrlParams`** — old name still works as a deprecated alias
 
 ## Author
-Srinivas N [srinivas69cse@gmail.com]
 
-## Licence
-MIT @[Srinivas_N](srinivasnarayansetty.com/)
+**Srinivas N** — [srinivas69cse@gmail.com](mailto:srinivas69cse@gmail.com)
 
+## License
 
-
-
-
-
-
-
-
-
-
-
-
-
-<!-- [![Coverage Status](https://coveralls.io/repos/github/SrinivasNarayansetty/hearty-helper/badge.svg)](https://coveralls.io/github/SrinivasNarayansetty/hearty-helper) -->
+[MIT](LICENSE)

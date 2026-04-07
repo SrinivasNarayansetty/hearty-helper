@@ -1,33 +1,61 @@
 {
   "name": "hearty-helper",
-  "version": "1.0.4",
-  "description": "Hearty helper is a small libraray that gives helper function like number formatter, date formatter, Object check , etc.",
-  "main": "index.js",
+  "version": "2.0.0",
+  "description": "A lightweight TypeScript utility library providing helper functions for URL parsing, object checks, string operations, cookies, and HTTP requests.",
+  "type": "module",
+  "main": "./dist/index.cjs",
+  "module": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    ".": {
+      "import": {
+        "types": "./dist/index.d.ts",
+        "default": "./dist/index.js"
+      },
+      "require": {
+        "types": "./dist/index.d.cts",
+        "default": "./dist/index.cjs"
+      }
+    }
+  },
+  "files": [
+    "dist"
+  ],
   "scripts": {
-    "test": "mocha --reporter spec",
-    "cover": "node_modules/istanbul/lib/cli.js cover node_modules/mocha/bin/_mocha -- -R spec test/*"
+    "build": "tsup",
+    "dev": "tsup --watch",
+    "test": "vitest run",
+    "test:watch": "vitest",
+    "test:coverage": "vitest run --coverage",
+    "lint": "tsc --noEmit",
+    "prepublishOnly": "npm run build"
   },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/SrinivasNarayansetty/hearty-helper.git"
   },
-  "author": "“Srinivas <“srinivas69cse@gmail.com”> (http://srinivasnarayansetty.com/)",
+  "author": "Srinivas N <srinivas69cse@gmail.com> (http://srinivasnarayansetty.com/)",
   "license": "MIT",
   "bugs": {
     "url": "https://github.com/SrinivasNarayansetty/hearty-helper/issues"
   },
   "homepage": "https://github.com/SrinivasNarayansetty/hearty-helper#readme",
   "engines": {
-    "node": ">=4.2.4"
+    "node": ">=18"
   },
   "devDependencies": {
-    "chai": "^4.2.0",
-    "coveralls": "^3.0.2",
-    "istanbul": "^0.4.5",
-    "mocha": "^5.2.0"
+    "tsup": "^8.4.0",
+    "typescript": "^5.7.0",
+    "vitest": "^3.1.0"
   },
   "keywords": [
     "hearty-helper",
-    "hearty-number-formatter"
+    "utility",
+    "helper",
+    "url-parser",
+    "object-utils",
+    "string-utils",
+    "typescript",
+    "lightweight"
   ]
 }
