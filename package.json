@@ -1,7 +1,7 @@
 {
   "name": "hearty-helper",
-  "version": "2.0.0",
-  "description": "A lightweight TypeScript utility library providing helper functions for URL parsing, object checks, string operations, cookies, and HTTP requests.",
+  "version": "2.1.0",
+  "description": "A comprehensive TypeScript utility library — numbers, strings, arrays, objects, validators, and more. Your single source of utility functions.",
   "type": "module",
   "main": "./dist/index.cjs",
   "module": "./dist/index.js",
@@ -55,7 +55,15 @@
     "url-parser",
     "object-utils",
     "string-utils",
+    "array-utils",
+    "number-format",
+    "validators",
+    "regex",
+    "deep-clone",
+    "debounce",
+    "throttle",
+    "memoize",
     "typescript",
-    "lightweight"
+    "lodash-alternative"
   ]
 }
